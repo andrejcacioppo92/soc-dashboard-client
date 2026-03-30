@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-soc-bg text-soc-text font-sans antialiased;
+  margin: 0;
+}
