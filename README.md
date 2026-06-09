@@ -4,6 +4,8 @@ Interfaccia web della dashboard SOC per la gestione di asset IT, ticketing di vu
 
 Progetto capstone full-stack per il corso di Cybersecurity presso EPICODE Institute of Technology.
 
+![SOC Asset Inventory Dashboard](docs/dashboard.png)
+
 ## Panoramica
 
 Single Page Application che consuma le API REST del back-end Spring Boot e offre agli operatori SOC un'interfaccia operativa per consultare l'inventario asset, segnalare vulnerabilità, richiedere piani di mitigazione AI e monitorare le statistiche del centro operativo. L'interfaccia è progettata per essere usata da operatori con ruoli diversi e mostra contenuti differenziati in base al ruolo dell'utente loggato.
