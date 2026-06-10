@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchMioProfilo } from '../store/authSlice';
+import { API_BASE_URL } from '../config';
 
 export default function Profilo() {
     const navigate = useNavigate();
@@ -40,7 +41,7 @@ export default function Profilo() {
         setErrore('');
 
         try {
-            const response = await fetch('http://localhost:8080/api/users/me', {
+            const response = await fetch(`${API_BASE_URL}/api/users/me`, {
                 method: 'PATCH',
                 headers: {
                     'Authorization': `Bearer ${token}`,

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAssets } from '../store/assetsSlice';
 import { logout } from '../store/authSlice';
+import { API_BASE_URL } from '../config';
 import Card from '../components/Card';
 import Badge from '../components/Badge';
 import LoadingSpinner from '../components/LoadingSpinner';
@@ -43,7 +44,7 @@ export default function Dashboard() {
     setLoading(true);
     setAiResponse(null);
     try {
-      const response = await fetch(`http://localhost:8080/api/ai/mitigate/${ticketId}`, {
+      const response = await fetch(`${API_BASE_URL}/api/ai/mitigate/${ticketId}`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -201,7 +202,6 @@ export default function Dashboard() {
                             >
                               [ Dettaglio ]
                             </button>
-                            {/* AI MITIGATION non lo mostro al viewer, è un'azione che consuma quota API */}
                             {(isAdmin || isAnalyst) && (
                                 <button
                                     onClick={() => requestAiMitigation(asset.id)}

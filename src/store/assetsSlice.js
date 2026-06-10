@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { API_BASE_URL } from '../config';
 
 // thunk per recuperare la lista degli asset dal back-end
 // il token lo prendo da sessionStorage per autenticare la richiesta
@@ -7,7 +8,7 @@ export const fetchAssets = createAsyncThunk(
     async (_, { rejectWithValue }) => {
         try {
             const token = sessionStorage.getItem('jwt_token');
-            const response = await fetch('http://localhost:8080/api/assets', {
+            const response = await fetch(`${API_BASE_URL}/api/assets`, {
                 headers: { 'Authorization': `Bearer ${token}` },
             });
 
@@ -30,8 +31,8 @@ export const creaAsset = createAsyncThunk(
         try {
             const token = sessionStorage.getItem('jwt_token');
             const endpoint = tipo === 'SERVER'
-                ? 'http://localhost:8080/api/assets/servers'
-                : 'http://localhost:8080/api/assets/firewalls';
+                ? `${API_BASE_URL}/api/assets/servers`
+                : `${API_BASE_URL}/api/assets/firewalls`;
 
             const response = await fetch(endpoint, {
                 method: 'POST',

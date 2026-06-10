@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { API_BASE_URL } from '../config';
 
 // thunk per il login, gestisce la chiamata async al back-end
 // se le credenziali sono giuste salvo il token in sessionStorage e nello stato
@@ -6,7 +7,7 @@ export const loginUtente = createAsyncThunk(
     'auth/login',
     async ({ username, password }, { rejectWithValue }) => {
         try {
-            const response = await fetch('http://localhost:8080/api/auth/login', {
+            const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, password }),
@@ -36,7 +37,7 @@ export const fetchMioProfilo = createAsyncThunk(
                 return rejectWithValue('Token mancante');
             }
 
-            const response = await fetch('http://localhost:8080/api/users/me', {
+            const response = await fetch(`${API_BASE_URL}/api/users/me`, {
                 headers: { 'Authorization': `Bearer ${token}` },
             });
 

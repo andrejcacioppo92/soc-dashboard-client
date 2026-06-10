@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { API_BASE_URL } from '../config';
 import Card from '../components/Card';
 import Badge from '../components/Badge';
 import LoadingSpinner from '../components/LoadingSpinner';
@@ -56,8 +57,8 @@ export default function AssetDetail() {
     const fetchData = async () => {
       try {
         const [assetRes, ticketRes] = await Promise.all([
-          fetch(`http://localhost:8080/api/assets/${id}`, { headers }),
-          fetch(`http://localhost:8080/api/tickets/asset/${id}`, { headers })
+          fetch(`${API_BASE_URL}/api/assets/${id}`, { headers }),
+          fetch(`${API_BASE_URL}/api/tickets/asset/${id}`, { headers })
         ]);
 
         if (assetRes.status === 401 || assetRes.status === 403) {
@@ -87,7 +88,7 @@ export default function AssetDetail() {
     e.preventDefault();
     setLoadingTicket(true);
     try {
-      const response = await fetch('http://localhost:8080/api/tickets', {
+      const response = await fetch(`${API_BASE_URL}/api/tickets`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -119,7 +120,7 @@ export default function AssetDetail() {
     setLoadingAi(true);
     setAiResponse(null);
     try {
-      const response = await fetch(`http://localhost:8080/api/ai/mitigate/${ticketId}`, {
+      const response = await fetch(`${API_BASE_URL}/api/ai/mitigate/${ticketId}`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'

@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { API_BASE_URL } from '../config';
 import Card from '../components/Card';
 import Badge from '../components/Badge';
 import LoadingSpinner from '../components/LoadingSpinner';
@@ -25,7 +26,7 @@ export default function Report() {
             if (filtroGravita) params.append('gravita', filtroGravita);
             if (filtroStato) params.append('stato', filtroStato);
 
-            const url = `http://localhost:8080/api/tickets?${params.toString()}`;
+            const url = `${API_BASE_URL}/api/tickets?${params.toString()}`;
             const response = await fetch(url, {
                 headers: { 'Authorization': `Bearer ${token}` },
             });
@@ -46,7 +47,7 @@ export default function Report() {
 
         const caricaStats = async () => {
             try {
-                const response = await fetch('http://localhost:8080/api/tickets/stats', {
+                const response = await fetch(`${API_BASE_URL}/api/tickets/stats`, {
                     headers: { 'Authorization': `Bearer ${token}` },
                 });
                 if (response.ok) {
