@@ -1,0 +1,36 @@
+name: CI Front-End
+
+# il workflow parte a ogni push e pull request sul branch main
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # scarico il codice del repository
+      - name: Checkout del codice
+        uses: actions/checkout@v4
+
+      # installo Node.js 20 LTS con cache delle dipendenze npm
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      # installo le dipendenze in modo pulito e riproducibile dal package-lock
+      - name: Installazione dipendenze
+        run: npm ci
+
+      # controllo qualità del codice con ESLint
+      - name: Lint
+        run: npm run lint
+
+      # verifico che il progetto compili correttamente per la produzione
+      - name: Build
+        run: npm run build
