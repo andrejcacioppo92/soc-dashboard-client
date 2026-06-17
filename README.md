@@ -1,5 +1,7 @@
 # SOC Asset & Vulnerability Manager — Front-End
 
+![CI](https://github.com/andrejcacioppo92/soc-dashboard-client/actions/workflows/ci.yml/badge.svg)
+
 Interfaccia web della dashboard SOC per la gestione di asset IT, ticketing di vulnerabilità e mitigazioni AI.
 
 Progetto capstone full-stack per il corso di Cybersecurity presso EPICODE Institute of Technology.
@@ -12,9 +14,9 @@ Single Page Application che consuma le API REST del back-end Spring Boot e offre
 
 ## Stack Tecnologico
 
-- **React 18** + **Vite** come build tool
+- **React 19** + **Vite** come build tool
 - **Redux Toolkit** + **Redux Thunk** per la gestione dello stato globale
-- **React Router 6** per la navigazione client-side
+- **React Router 7** per la navigazione client-side
 - **Tailwind CSS** per lo styling utility-first
 - **Fetch API** nativa per le chiamate HTTP
 
@@ -35,6 +37,7 @@ Le chiamate API sono gestite da Thunk Redux per le risorse condivise (autenticaz
 - Route private protette da un componente `ProtectedRoute` che redirige al login in assenza di token
 - Logout sicuro che rimuove il token dalla sessione e svuota lo store
 - Nessuna credenziale o chiave API hardcodata nel codice front-end
+- Dipendenze npm sottoposte a controllo periodico con `npm audit` (vedi `SECURITY.md`)
 
 ## Pagine
 
@@ -74,4 +77,25 @@ L'interfaccia adatta i contenuti visibili in base al ruolo dell'utente recuperat
 ## Configurazione
 
 1. Clona il repository
-2. Installa le dipendenze:
+2. Installa le dipendenze con il comando `npm install`
+3. (Opzionale) configura l'URL del back-end tramite la variabile `VITE_API_BASE_URL`; in assenza, l'app punta di default a `http://localhost:8080`
+4. Avvia l'ambiente di sviluppo con `npm run dev` — l'app sarà disponibile su `http://localhost:5173`
+
+## Script Disponibili
+
+- `npm run dev` — avvia il server di sviluppo Vite con hot reload
+- `npm run build` — genera la build di produzione nella cartella `dist`
+- `npm run preview` — serve localmente la build di produzione per una verifica finale
+- `npm run lint` — esegue il controllo qualità del codice con ESLint
+
+## Integrazione Continua (CI)
+
+Il repository integra una pipeline CI con GitHub Actions che, a ogni push e pull request sul branch `main`, esegue il lint del codice e la build di produzione, verificando automaticamente che il progetto sia sempre in uno stato compilabile e coerente.
+
+## Sicurezza delle Dipendenze
+
+La gestione delle vulnerabilità delle dipendenze npm e le relative decisioni di rischio sono documentate nel file `SECURITY.md`.
+
+## Licenza
+
+Progetto realizzato a scopo didattico nell'ambito del percorso di Cybersecurity presso EPICODE Institute of Technology.
